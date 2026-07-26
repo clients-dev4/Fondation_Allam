@@ -330,7 +330,24 @@
         }
     });
 
-    // ===== Articles (Entraide page) — Google Sheets =====
+    // ===== Articles (page Nos Articles) — catalogue local =====
+    // Pour ajouter/retirer un article : modifier ce tableau.
+    // statut : 'disponible' | 'réservé' (grisé) | 'masqué' (retiré de la page)
+    var LOCAL_ARTICLES = [
+        { titre: 'Maillot PSG 2023-24 domicile', categorie: 'Maillot de foot', description: 'Maillot domicile Nike 2023-24, floqué « IVAR 04 » au dos. Très bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/maillot_psg2_M.jpeg', statut: 'disponible' },
+        { titre: 'Maillot PSG 2020-21 domicile', categorie: 'Maillot de foot', description: 'Maillot domicile Nike 2020-21 (sponsor ALL). Très bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/maillot_psg_M.jpeg', statut: 'disponible' },
+        { titre: 'Maillot Algérie rose (adidas)', categorie: 'Maillot de foot', description: 'Maillot d\'entraînement adidas de l\'équipe d\'Algérie, rose. Bon état.', ville: 'Évry (91)', taille: 'L', prix: '2€', photo: 'articles/maillot_algerie_rose_L.jpeg', statut: 'disponible' },
+        { titre: 'Maillot Algérie vert (adidas)', categorie: 'Maillot de foot', description: 'Maillot adidas de l\'équipe d\'Algérie, vert rayé, 2 étoiles. Bon état.', ville: 'Évry (91)', taille: 'L', prix: '2€', photo: 'articles/maollot_algerie_vert_L.jpeg', statut: 'disponible' },
+        { titre: 'Maillot Espagne extérieur', categorie: 'Maillot de foot', description: 'Maillot extérieur adidas de l\'équipe d\'Espagne, blanc. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/maillot_espagne_M.jpeg', statut: 'disponible' },
+        { titre: 'Maillot Real Madrid 2020-21', categorie: 'Maillot de foot', description: 'Maillot domicile adidas 2020-21 (Emirates Fly Better), blanc. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/maillot_real_madrid_M.jpeg', statut: 'disponible' },
+        { titre: 'T-shirt Nike PSG « PARIS »', categorie: 'T-shirt', description: 'T-shirt Nike PSG « PARIS », bleu marine, coton. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/tshirt-psg-M.jpeg', statut: 'disponible' },
+        { titre: 'T-shirt adidas Originals bleu', categorie: 'T-shirt', description: 'T-shirt adidas Originals bleu, bandes tricolores aux épaules. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/tshirt_adidas_france_M.jpeg', statut: 'disponible' },
+        { titre: 'T-shirt Nike Sportswear jaune', categorie: 'T-shirt', description: 'T-shirt Nike Sportswear jaune clair, coton. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/tshirt_jaune_nike_M.jpeg', statut: 'disponible' },
+        { titre: 'T-shirt crème oversize', categorie: 'T-shirt', description: 'T-shirt crème coupe oversize. Bon état.', ville: 'Évry (91)', taille: 'S', prix: '2€', photo: 'articles/tshirt_creme_oversize_S.jpeg', statut: 'disponible' },
+        { titre: 'Sweat H&M vert d\'eau', categorie: 'Pull / Sweat', description: 'Sweat H&M col rond, vert d\'eau. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/pull_hm_M_bleu_turquoise.jpeg', statut: 'disponible' },
+        { titre: 'Sweat gris chiné (Zara)', categorie: 'Pull / Sweat', description: 'Sweat Zara col rond, gris chiné. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/pull_hm_gris_M.jpeg', statut: 'disponible' }
+    ];
+
     var articlesData = [];
 
     window.loadArticles = function () {
@@ -340,60 +357,36 @@
         var error = document.getElementById('errorState');
         if (!grid) return;
 
-        grid.innerHTML = '';
-        if (loading) loading.style.display = 'block';
-        if (empty) empty.style.display = 'none';
+        if (loading) loading.style.display = 'none';
         if (error) error.style.display = 'none';
 
-        var url = 'https://docs.google.com/spreadsheets/d/' + CFG.googleSheetId + '/gviz/tq?tqx=out:json&sheet=' + encodeURIComponent(CFG.googleSheetName);
+        // On retire les articles masqués
+        articlesData = LOCAL_ARTICLES.filter(function (a) {
+            var s = (a.statut || '').toLowerCase();
+            return s !== 'masqué' && s !== 'masque';
+        });
 
-        fetch(url)
-            .then(function (r) { return r.text(); })
-            .then(function (text) {
-                var json = JSON.parse(text.substring(47, text.length - 2));
-                var rows = json.table.rows;
-                articlesData = [];
-
-                for (var i = 1; i < rows.length; i++) {
-                    var row = rows[i].c;
-                    if (!row || !row[0]) continue;
-                    var article = {
-                        titre: row[0] ? row[0].v : '',
-                        categorie: row[1] ? row[1].v : '',
-                        description: row[2] ? row[2].v : '',
-                        ville: row[3] ? row[3].v : '',
-                        date: row[4] ? row[4].v : '',
-                        photo: row[5] ? row[5].v : '',
-                        statut: row[6] ? row[6].v : 'disponible'
-                    };
-                    var statutLower = (article.statut || '').toLowerCase();
-                    if (statutLower !== 'masqué' && statutLower !== 'masque') {
-                        articlesData.push(article);
-                    }
-                }
-
-                if (loading) loading.style.display = 'none';
-                if (articlesData.length === 0) {
-                    if (empty) empty.style.display = 'block';
-                } else {
-                    renderArticles(articlesData);
-                }
-            })
-            .catch(function (err) {
-                console.error('Erreur chargement:', err);
-                if (loading) loading.style.display = 'none';
-                if (error) error.style.display = 'block';
-            });
+        if (articlesData.length === 0) {
+            if (empty) empty.style.display = 'block';
+        } else {
+            if (empty) empty.style.display = 'none';
+            renderArticles(articlesData);
+        }
     };
 
     function renderArticles(articles) {
         var grid = document.getElementById('itemsGrid');
         grid.innerHTML = '';
 
+        var PIN_SVG = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>';
+        var TAG_SVG = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5a2 2 0 011.414.586l7 7a2 2 0 010 2.828l-5.172 5.172a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>';
+
         articles.forEach(function (article, index) {
             var statutLower = (article.statut || '').toLowerCase();
             var isReserved = statutLower === 'réservé' || statutLower === 'reserve';
             var photoUrl = article.photo || 'https://placehold.co/400x200/f5f5f5/666?text=Photo+Article';
+            var tailleSpan = article.taille ? ('<span>' + TAG_SVG + 'Taille ' + article.taille + '</span>') : '';
+            var priceBadge = article.prix ? ('<span class="item-price">' + article.prix + '</span>') : '';
 
             var card = document.createElement('div');
             card.className = 'item-card' + (isReserved ? ' reserved' : '');
@@ -402,12 +395,15 @@
             card.innerHTML =
                 '<img loading="lazy" src="' + photoUrl + '" alt="' + article.titre + '" class="item-image" onerror="this.src=\'https://placehold.co/400x200/f5f5f5/666?text=Photo+Article\'">' +
                 '<div class="item-content">' +
-                    '<span class="item-category">' + article.categorie + '</span>' +
+                    '<div class="item-top">' +
+                        '<span class="item-category">' + article.categorie + '</span>' +
+                        priceBadge +
+                    '</div>' +
                     '<h3 class="item-title">' + article.titre + '</h3>' +
                     '<p class="item-description">' + article.description + '</p>' +
                     '<div class="item-meta">' +
-                        '<span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>' + article.ville + '</span>' +
-                        '<span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>' + article.date + '</span>' +
+                        '<span>' + PIN_SVG + article.ville + '</span>' +
+                        tailleSpan +
                     '</div>' +
                     '<button class="btn-reserve" ' + (isReserved ? 'disabled' : 'onclick="openReservation(this)"') + '>' +
                     (isReserved ? 'Déjà réservé' : 'Réserver cet article') +
@@ -416,19 +412,75 @@
 
             grid.appendChild(card);
         });
+
+        // Synchronise le menu déroulant du formulaire avec la grille
+        populateArticleSelect();
+    }
+
+    var PLACEHOLDER_IMG = 'https://placehold.co/400x200/f5f5f5/666?text=Photo+Article';
+
+    // Articles réellement réservables (ni réservés, ni masqués)
+    function getAvailableArticles() {
+        return articlesData.filter(function (a) {
+            var s = (a.statut || '').toLowerCase();
+            return s !== 'réservé' && s !== 'reserve' && s !== 'masqué' && s !== 'masque';
+        });
+    }
+
+    function findArticleByTitle(title) {
+        for (var i = 0; i < articlesData.length; i++) {
+            if (articlesData[i].titre === title) return articlesData[i];
+        }
+        return null;
+    }
+
+    // Remplit le <select> du formulaire avec les titres des articles disponibles
+    function populateArticleSelect() {
+        var sel = document.getElementById('articleSelect');
+        if (!sel) return;
+        var previous = sel.value;
+        sel.innerHTML = '<option value="">Sélectionnez un article</option>';
+        getAvailableArticles().forEach(function (a) {
+            var opt = document.createElement('option');
+            opt.value = a.titre;
+            opt.textContent = a.titre;
+            sel.appendChild(opt);
+        });
+        // Conserve la sélection si l'article est toujours disponible
+        if (previous && findArticleByTitle(previous)) sel.value = previous;
+    }
+
+    // Met à jour l'entête de la modale selon l'article sélectionné dans le menu
+    function updateModalHeaderFromSelect() {
+        var sel = document.getElementById('articleSelect');
+        if (!sel) return;
+        var article = findArticleByTitle(sel.value);
+        var titleEl = document.getElementById('modalItemTitle');
+        var catEl = document.getElementById('modalItemCategory');
+        var imgEl = document.getElementById('modalItemImage');
+        if (article) {
+            titleEl.textContent = article.titre;
+            catEl.textContent = article.prix ? (article.categorie + ' · ' + article.prix) : article.categorie;
+            imgEl.src = article.photo || PLACEHOLDER_IMG;
+        } else {
+            titleEl.textContent = 'Votre réservation';
+            catEl.textContent = '';
+            imgEl.src = PLACEHOLDER_IMG;
+        }
     }
 
     // ===== Modal Reservation =====
     window.openReservation = function (btn) {
         var card = btn.closest('.item-card');
         var title = card.querySelector('.item-title').textContent;
-        var category = card.querySelector('.item-category').textContent;
-        var image = card.querySelector('.item-image').src;
 
-        document.getElementById('modalItemTitle').textContent = title;
-        document.getElementById('modalItemCategory').textContent = category;
-        document.getElementById('modalItemImage').src = image;
-        document.getElementById('hiddenArticle').value = title;
+        populateArticleSelect();
+        var sel = document.getElementById('articleSelect');
+        if (sel) {
+            sel.value = title;
+            sel.onchange = updateModalHeaderFromSelect;
+        }
+        updateModalHeaderFromSelect();
 
         document.getElementById('reservationModal').classList.add('active');
         document.body.style.overflow = 'hidden';

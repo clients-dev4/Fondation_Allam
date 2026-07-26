@@ -6,8 +6,8 @@
     <link rel="canonical" href="https://fondation-allam.fr/don-gratuit.html"/>
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://fondation-allam.fr/don-gratuit.html">
-    <meta property="og:title" content="Entraide Solidaire - Articles sur Vinted | Fondation Allam">
-    <meta property="og:description" content="Recevez ou donnez des articles via le Vinted solidaire de la Fondation Allam. Les articles sont donnés : vous ne payez que la livraison (1 à 2€).">
+    <meta property="og:title" content="Nos Articles Solidaires | Fondation Allam">
+    <meta property="og:description" content="Réservez un article solidaire (vêtements, maillots de foot, t-shirts, sweats) auprès de la Fondation Allam. Une seule demande par personne — premier arrivé, premier servi.">
     <meta property="og:image" content="https://fondation-allam.fr/colis_alimentaire_91.webp">
     <link rel="icon" href="favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -15,9 +15,9 @@
     <link rel="apple-touch-icon" sizes="96x96" href="favicon-96x96.png">
     <meta name="msapplication-TileColor" content="#ffffff">
 
-    <title>Entraide Solidaire - Articles sur Vinted | Fondation Allam</title>
+    <title>Nos Articles Solidaires | Fondation Allam</title>
 <meta name='robots' content='max-image-preview:large' />
-<meta name="description" content="Recevez ou donnez des articles via le Vinted solidaire de la Fondation Allam. Les articles sont donnés : vous ne payez que la livraison (1 à 2€).">
+<meta name="description" content="Réservez un article solidaire (vêtements, maillots de foot, t-shirts, sweats) auprès de la Fondation Allam. Une seule demande par personne — premier arrivé, premier servi.">
 <link rel='dns-prefetch' href='//fonts.googleapis.com' />
 <link href='https://fonts.gstatic.com' crossorigin='anonymous' rel='preconnect' />
 
@@ -35,9 +35,9 @@
         <nav class="nav" id="nav">
             <ul class="nav-list">
                 <li><a href="index.html" class="nav-link" title="Accueil - Association musulmane humanitaire">Accueil</a></li>
+                <li><a href="don-gratuit.html" class="nav-link active" title="Entraide solidaire">Nos Articles</a></li>
                 <li><a href="ong-musulmane-fiable.html" class="nav-link" title="À propos de notre ONG musulmane fiable">À propos</a></li>
                 <li><a href="distribution-colis-alimentaire.html" class="nav-link" title="Galerie distributions colis alimentaires">Galerie</a></li>
-                <li><a href="don-gratuit.html" class="nav-link active" title="Entraide solidaire">Entraide</a></li>
                 <li><a href="contact-don-alimentaire.html" class="nav-link" title="Contact association humanitaire musulmane">Contact</a></li>
             </ul>
         </nav>
@@ -119,22 +119,157 @@
 .info-card h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--secondary-color); }
 .info-card p { color: var(--text-light); font-size: 14px; }
 
+/* Mention équité */
+.fairness-note {
+    display: flex; align-items: center; gap: 12px;
+    max-width: 720px; margin: 18px auto 0;
+    background: rgba(184, 146, 58, .10);
+    border: 1px solid rgba(184, 146, 58, .35);
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 14px;
+    color: var(--secondary-color);
+    text-align: left;
+}
+.fairness-note svg { width: 24px; height: 24px; flex-shrink: 0; color: var(--primary-dark); }
+.fairness-note strong { color: var(--primary-dark); }
+
+/* Grille d'articles */
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 45px;
+}
+.item-card {
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display: flex; flex-direction: column;
+    transition: var(--transition);
+}
+.item-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,.12); }
+.item-image {
+    width: 100%; height: 210px;
+    object-fit: cover;
+    background: var(--gray-light);
+}
+.item-content { padding: 22px; display: flex; flex-direction: column; flex: 1; }
+.item-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; }
+.item-category {
+    background: rgba(184, 146, 58, .12);
+    color: var(--primary-dark);
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .03em;
+    padding: 4px 12px; border-radius: 50px;
+}
+.item-price {
+    flex-shrink: 0;
+    background: var(--secondary-color); color: #fff;
+    font-size: 14px; font-weight: 700;
+    padding: 4px 12px; border-radius: 50px;
+    white-space: nowrap;
+}
+.item-title { font-size: 1.15rem; color: var(--secondary-color); margin-bottom: 8px; }
+.item-description { font-size: 14px; color: var(--text-light); margin-bottom: 16px; flex: 1; }
+.item-meta {
+    display: flex; flex-wrap: wrap; gap: 14px;
+    font-size: 13px; color: var(--text-light);
+    margin-bottom: 18px;
+}
+.item-meta span { display: inline-flex; align-items: center; gap: 5px; }
+.item-meta svg { width: 15px; height: 15px; }
+.btn-reserve {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: #fff; border: none;
+    padding: 13px 20px; border-radius: 50px;
+    font-weight: 700; font-size: 15px; cursor: pointer;
+    transition: var(--transition);
+}
+.btn-reserve:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(184,146,58,.35); }
+.item-card.reserved { opacity: .7; }
+.item-card.reserved .item-image { filter: grayscale(.6); }
+.btn-reserve:disabled { background: #cfcfcf; color: #fff; cursor: not-allowed; }
+
+/* États chargement / vide / erreur */
+.items-state { text-align: center; padding: 60px 20px; color: var(--text-light); }
+.items-spinner {
+    width: 44px; height: 44px; margin: 0 auto 18px;
+    border: 4px solid var(--gray-border);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: itemsSpin .8s linear infinite;
+}
+@keyframes itemsSpin { to { transform: rotate(360deg); } }
+
+/* Modale de réservation */
+.reservation-modal {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.6);
+    display: none; align-items: center; justify-content: center;
+    z-index: 2000; padding: 20px;
+}
+.reservation-modal.active { display: flex; }
+.reservation-modal-content {
+    background: var(--white);
+    border-radius: 18px;
+    max-width: 520px; width: 100%;
+    max-height: 92vh; overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+    animation: modalIn .25s ease;
+}
+@keyframes modalIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.reservation-modal-header {
+    display: flex; align-items: center; gap: 16px;
+    padding: 22px 24px; border-bottom: 1px solid var(--gray-border);
+    position: relative;
+}
+.reservation-modal-header img {
+    width: 64px; height: 64px; border-radius: 12px; object-fit: cover; background: var(--gray-light);
+}
+.reservation-modal-header h3 { font-size: 1.15rem; color: var(--secondary-color); margin-bottom: 4px; }
+.reservation-modal-header .modal-cat { font-size: 13px; color: var(--primary-dark); font-weight: 600; }
+.modal-close {
+    position: absolute; top: 14px; right: 16px;
+    background: none; border: none; font-size: 28px; line-height: 1;
+    color: var(--text-light); cursor: pointer;
+}
+.reservation-modal-body { padding: 24px; }
+.reservation-modal-body p.modal-intro { font-size: 14px; color: var(--text-light); margin-bottom: 20px; }
+.reservation-modal-body .form-group { margin-bottom: 16px; }
+.reservation-modal-body label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--secondary-color); }
+.reservation-modal-body input,
+.reservation-modal-body select,
+.reservation-modal-body textarea {
+    width: 100%; padding: 12px 14px;
+    border: 1px solid var(--gray-border); border-radius: 10px;
+    font-family: inherit; font-size: 15px;
+    background: var(--white);
+}
+.reservation-modal-body input:focus,
+.reservation-modal-body select:focus,
+.reservation-modal-body textarea:focus { outline: none; border-color: var(--primary-color); }
+
 @media (max-width: 1024px) {
     .steps-grid { grid-template-columns: repeat(2, 1fr); }
     .info-grid { grid-template-columns: repeat(2, 1fr); }
+    .items-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
     .page-hero h1 { font-size: 2rem; }
     .steps-grid { grid-template-columns: 1fr; }
     .info-grid { grid-template-columns: 1fr; }
+    .items-grid { grid-template-columns: 1fr; }
     .vinted-note { display: block; }
 }
 </style>
 
 <section class="page-hero">
     <div class="container">
-        <h1>Entraide Solidaire</h1>
-        <p>Retrouvez nos articles à 1€ sur notre Vinted solidaire, ou donnez les objets dont vous n'avez plus besoin à des familles dans le besoin.</p>
+        <h1>Nos Articles Solidaires</h1>
+        <p>Réservez un article à partir de 2€ parmi ceux disponibles ci-dessous, ou donnez les objets dont vous n'avez plus besoin à des familles dans le besoin.</p>
     </div>
 </section>
 
@@ -142,21 +277,35 @@
 <section class="how-section" id="recevoir">
     <div class="container">
         <h2 class="section-title">Vous souhaitez un article ?</h2>
-        <p class="section-subtitle">Tout se passe sur notre Vinted solidaire, en 4 étapes simples</p>
+        <p class="section-subtitle">Réservez l'article de votre choix, on vous envoie le lien pour le recevoir</p>
         <div class="steps-grid">
-            <div class="step-card"><div class="step-number">1</div><h3>Parcourez</h3><p>Découvrez tous nos articles à 1€ sur notre compte Vinted&nbsp;: vêtements, mobilier, jouets, électroménager…</p></div>
-            <div class="step-card"><div class="step-number">2</div><h3>Choisissez</h3><p>Sélectionnez l'article qui vous plaît et ajoutez-le à votre panier, comme un achat classique.</p></div>
-            <div class="step-card"><div class="step-number">3</div><h3>Commandez</h3><p>Réglez votre article à 1€ directement sur Vinted, en quelques clics.</p></div>
-            <div class="step-card"><div class="step-number">4</div><h3>Recevez chez vous</h3><p>Votre colis est expédié directement à votre adresse, partout en France.</p></div>
+            <div class="step-card"><div class="step-number">1</div><h3>Parcourez</h3><p>Découvrez ci-dessous tous nos articles disponibles&nbsp;: vêtements, mobilier, jouets, électroménager…</p></div>
+            <div class="step-card"><div class="step-number">2</div><h3>Réservez</h3><p>Cliquez sur « Réserver » et remplissez le formulaire avec vos coordonnées, en quelques secondes.</p></div>
+            <div class="step-card"><div class="step-number">3</div><h3>Recevez le lien</h3><p>Nous vous envoyons par email le lien de l'article réservé pour finaliser votre commande.</p></div>
+            <div class="step-card"><div class="step-number">4</div><h3>Recevez chez vous</h3><p>Réglez le montant symbolique (à partir de 2€) et votre colis est expédié directement chez vous, partout en France.</p></div>
         </div>
-        <div class="vinted-cta">
-            <a href="https://www.vinted.fr/member/3168517255" class="btn-vinted" target="_blank" rel="noopener" title="Voir les articles de la Fondation Allam sur Vinted">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-                Voir nos articles sur Vinted
-            </a>
-            <div class="vinted-note">
-                🤝&nbsp;<span><strong>Des articles à 1€</strong> pour permettre à chaque famille d'accéder à l'essentiel. L'association agit dans un but 100% solidaire.</span>
-            </div>
+
+        <div class="vinted-note" style="margin: 45px auto 0;">
+            🤝&nbsp;<span><strong>Des articles à partir de 2€</strong> pour permettre à chaque famille d'accéder à l'essentiel. L'association agit dans un but 100% solidaire.</span>
+        </div>
+
+        <div class="fairness-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            <span><strong>Une seule demande par personne</strong> — un seul article par foyer, afin que chacun puisse en bénéficier. C'est <strong>premier arrivé, premier servi</strong>&nbsp;! 🙏</span>
+        </div>
+
+        <!-- Grille d'articles -->
+        <div class="items-grid" id="itemsGrid"></div>
+
+        <div class="items-state" id="loadingState">
+            <div class="items-spinner"></div>
+            <p>Chargement des articles…</p>
+        </div>
+        <div class="items-state" id="emptyState" style="display:none">
+            <p>Aucun article disponible pour le moment. Revenez bientôt&nbsp;! 🙂</p>
+        </div>
+        <div class="items-state" id="errorState" style="display:none">
+            <p>Impossible de charger les articles pour le moment. Merci de réessayer plus tard.</p>
         </div>
     </div>
 </section>
@@ -187,8 +336,8 @@
                 <div class="info-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
                 </div>
-                <h3>Des articles à 1€</h3>
-                <p>Tous nos articles sont proposés à 1€ symbolique, dans un esprit purement solidaire.</p>
+                <h3>Des articles à partir de 2€</h3>
+                <p>Tous nos articles sont proposés à partir de 2€ symbolique, dans un esprit purement solidaire.</p>
             </div>
             <div class="info-card">
                 <div class="info-icon">
@@ -231,7 +380,7 @@
                     <li><a href="index.html" title="Accueil association musulmane">Accueil</a></li>
                     <li><a href="ong-musulmane-fiable.html" title="À propos association humanitaire musulmane">À propos</a></li>
                     <li><a href="distribution-colis-alimentaire.html" title="Galerie colis alimentaire distribution">Galerie</a></li>
-                    <li><a href="don-gratuit.html" title="Entraide solidaire">Entraide</a></li>
+                    <li><a href="don-gratuit.html" title="Entraide solidaire">Nos Articles</a></li>
                     <li><a href="contact-don-alimentaire.html" title="Contact don alimentaire">Contact</a></li>
                 </ul>
             </div>
@@ -274,11 +423,61 @@ window.FondationAllamConfig = {
     donRedirectMode: "helloasso",
     helloassoMonthly: "https://www.helloasso.com/associations/fondation-allam/adhesions/dons-mensuel",
     helloassoOnce: "https://www.helloasso.com/associations/fondation-allam/adhesions/dons-ponctuels",
+    googleSheetId: "1TOq8ni8kG1_5IfdfG-MNHLuCBNeUZkmdhC4Kqsn0LTo",
+    googleSheetName: "Feuille 1",
     formEndpoint: "https://formsubmit.co/ajax/fondation.allam@gmail.com",
     contactPageUrl: "contact-don-alimentaire.html"
 };
 </script>
 <script src="script.js"></script>
+
+<!-- Modale de réservation d'article -->
+<div class="reservation-modal" id="reservationModal">
+    <div class="reservation-modal-content">
+        <div class="reservation-modal-header">
+            <img id="modalItemImage" src="" alt="">
+            <div>
+                <span class="modal-cat" id="modalItemCategory"></span>
+                <h3 id="modalItemTitle"></h3>
+            </div>
+            <button type="button" class="modal-close" onclick="closeReservation()" aria-label="Fermer">&times;</button>
+        </div>
+        <div class="reservation-modal-body">
+            <p class="modal-intro">Remplissez vos coordonnées&nbsp;: nous vous enverrons par email le lien pour recevoir cet article. 🤝<br><strong>Rappel&nbsp;:</strong> une seule demande par personne (un article par foyer) — premier arrivé, premier servi.</p>
+            <form id="reservationForm" onsubmit="return submitReservation(event)">
+                <div class="hp-wrap">
+                    <label for="res-website">Votre site web :</label>
+                    <input type="text" id="res-website" name="_honey" autocomplete="off">
+                </div>
+                <input type="hidden" name="_captcha" value="false">
+                <div class="form-group">
+                    <label for="articleSelect">Article souhaité *</label>
+                    <select id="articleSelect" name="article" required>
+                        <option value="">Sélectionnez un article</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="res-name">Nom complet *</label>
+                    <input type="text" id="res-name" name="nom" placeholder="Votre nom" required>
+                </div>
+                <div class="form-group">
+                    <label for="res-email">Email *</label>
+                    <input type="email" id="res-email" name="email" placeholder="Votre email" required>
+                </div>
+                <div class="form-group">
+                    <label for="res-phone">Téléphone *</label>
+                    <input type="tel" id="res-phone" name="tel" placeholder="Votre numéro de téléphone" pattern="^((\+33|0)[1679])[0-9]{8}$" maxlength="12" required>
+                </div>
+                <div class="form-group">
+                    <label for="res-message">Message (facultatif)</label>
+                    <textarea id="res-message" name="commentaires" placeholder="Une précision ? (taille, couleur, disponibilité…)" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-large" style="width:100%">Envoyer ma réservation</button>
+            </form>
+        </div>
+    </div>
+</div>
+
     <nav class="bottom-nav">
         <a href="https://www.instagram.com/fondation.allam?igsh=MTRocjRneWFseTM1cg%3D%3D&utm_source=qr" target="_blank" rel="noopener" class="bottom-nav-item" title="Instagram Fondation Allam">
             <span class="bottom-nav-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span>
@@ -290,7 +489,7 @@ window.FondationAllamConfig = {
         </a>
         <a href="don-gratuit.html" class="bottom-nav-item" title="Entraide">
             <span class="bottom-nav-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="3"/><path d="M2 21v-1.5A4.5 4.5 0 0 1 6.5 15h5a4.5 4.5 0 0 1 4.5 4.5V21"/><path d="M16 3.5a3.5 3.5 0 0 1 0 7"/><path d="M22 21v-1.5a4.5 4.5 0 0 0-3-4.24"/></svg></span>
-            <span class="bottom-nav-label">Entraide</span>
+            <span class="bottom-nav-label">Nos Articles</span>
         </a>
         <a href="https://www.helloasso.com/associations/fondation-allam" target="_blank" rel="noopener" class="bottom-nav-item bottom-nav-don" title="Faire un don sur HelloAsso">
             <span class="bottom-nav-icon"><svg viewBox="0 0 24 24"><path d="M12 21c-3-2.5-7-5.5-7-10a3.5 3.5 0 0 1 7-1 3.5 3.5 0 0 1 7 1c0 4.5-4 7.5-7 10z"/></svg></span>

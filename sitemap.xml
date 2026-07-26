@@ -4,7 +4,7 @@
 
     <url>
         <loc>https://fondation-allam.fr</loc>
-        <lastmod>2026-07-18</lastmod>
+        <lastmod>2026-07-26</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         <image:image>
@@ -13,7 +13,7 @@
             <image:title>Colis alimentaire gratuit - Association musulmane humanitaire Essonne</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://fondation-allam.fr/fondation-allam.png</image:loc>
+            <image:loc>https://fondation-allam.fr/fondation_allam.png</image:loc>
             <image:caption>Logo officiel de la Fondation Allam, ONG musulmane fiable en Essonne.</image:caption>
             <image:title>Association musulmane Fondation Allam - ONG humanitaire fiable</image:title>
         </image:image>
@@ -21,7 +21,7 @@
 
     <url>
         <loc>https://fondation-allam.fr/ong-musulmane-fiable.html</loc>
-        <lastmod>2026-07-13</lastmod>
+        <lastmod>2026-07-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
         <image:image>
@@ -48,7 +48,7 @@
 
     <url>
         <loc>https://fondation-allam.fr/distribution-colis-alimentaire.html</loc>
-        <lastmod>2026-07-13</lastmod>
+        <lastmod>2026-07-26</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
         <image:image>
@@ -75,11 +75,11 @@
 
     <url>
         <loc>https://fondation-allam.fr/contact-don-alimentaire.html</loc>
-        <lastmod>2026-07-13</lastmod>
+        <lastmod>2026-07-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
         <image:image>
-            <image:loc>https://fondation-allam.fr/fondation-allam.png</image:loc>
+            <image:loc>https://fondation-allam.fr/fondation_allam.png</image:loc>
             <image:caption>Contactez l'association musulmane Fondation Allam pour faire un don alimentaire ou devenir benevole.</image:caption>
             <image:title>Contact don alimentaire - Association musulmane Fondation Allam</image:title>
         </image:image>
@@ -87,26 +87,31 @@
 
     <url>
         <loc>https://fondation-allam.fr/don-gratuit.html</loc>
-        <lastmod>2026-07-13</lastmod>
+        <lastmod>2026-07-26</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
         <image:image>
-            <image:loc>https://fondation-allam.fr/fondation-allam.png</image:loc>
-            <image:caption>Entraide solidaire - Recevez gratuitement des articles pour votre famille en Essonne.</image:caption>
-            <image:title>Entraide Articles Gratuits - Fondation Allam</image:title>
+            <image:loc>https://fondation-allam.fr/articles/maillot_psg2_M.jpeg</image:loc>
+            <image:caption>Maillot de foot solidaire à 2€ proposé par la Fondation Allam en Essonne.</image:caption>
+            <image:title>Nos Articles Solidaires - Maillots de foot - Fondation Allam</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://fondation-allam.fr/articles/tshirt_adidas_france_M.jpeg</image:loc>
+            <image:caption>Vêtements solidaires à petit prix pour les familles dans le besoin en Essonne.</image:caption>
+            <image:title>Nos Articles Solidaires - Vêtements - Fondation Allam</image:title>
         </image:image>
     </url>
 
     <url>
         <loc>https://fondation-allam.fr/mentions-legales.html</loc>
-        <lastmod>2026-07-13</lastmod>
+        <lastmod>2026-07-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
 
     <url>
         <loc>https://fondation-allam.fr/politique-de-paiement.html</loc>
-        <lastmod>2026-07-13</lastmod>
+        <lastmod>2026-07-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
