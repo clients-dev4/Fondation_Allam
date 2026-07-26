@@ -33,10 +33,13 @@
         return json && (json.success === true || json.success === 'true');
     }
 
-    // Détecte le honeypot (_honey, _gotcha ou botcheck en secours).
+    // Détecte le honeypot : champ texte (_honey/_gotcha) rempli, ou case botcheck (Web3Forms) cochée.
     function isSpam(form) {
-        var h = form.querySelector('[name="_honey"], [name="_gotcha"], [name="botcheck"]');
-        return h && h.value;
+        var text = form.querySelector('[name="_honey"], [name="_gotcha"]');
+        if (text && text.value) return true;
+        var check = form.querySelector('[name="botcheck"]');
+        if (check && check.checked) return true;
+        return false;
     }
 
     // ===== Mobile menu =====
