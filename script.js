@@ -446,7 +446,7 @@
             card.dataset.itemId = index + 1;
 
             card.innerHTML =
-                '<img loading="lazy" src="' + photoUrl + '" alt="' + article.titre + '" class="item-image" onerror="this.src=\'https://placehold.co/400x200/f5f5f5/666?text=Photo+Article\'">' +
+                '<img loading="lazy" src="' + photoUrl + '" alt="' + article.titre + '" class="item-image" onclick="openLightbox(this.src, this.alt)" onerror="this.src=\'https://placehold.co/400x200/f5f5f5/666?text=Photo+Article\'">' +
                 '<div class="item-content">' +
                     '<div class="item-top">' +
                         '<span class="item-category">' + article.categorie + '</span>' +
@@ -551,8 +551,27 @@
     });
 
     document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') window.closeReservation();
+        if (e.key === 'Escape') { window.closeReservation(); window.closeLightbox(); }
     });
+
+    // ===== Lightbox (agrandir la photo d'un article) =====
+    window.openLightbox = function (src, alt) {
+        var box = document.getElementById('lightbox');
+        var img = document.getElementById('lightboxImg');
+        if (!box || !img) return;
+        img.src = src;
+        img.alt = alt || '';
+        box.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closeLightbox = function () {
+        var box = document.getElementById('lightbox');
+        if (box) box.classList.remove('active');
+        if (!document.querySelector('.reservation-modal.active')) {
+            document.body.style.overflow = '';
+        }
+    };
 
     // ===== Form submissions (via FormSubmit — statique) =====
     window.submitToWebPrime = function (e) {
