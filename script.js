@@ -9,18 +9,18 @@
         helloassoOnce: 'https://www.helloasso.com/associations/fondation-allam/adhesions/dons-ponctuels',
         googleSheetId: '1TOq8ni8kG1_5IfdfG-MNHLuCBNeUZkmdhC4Kqsn0LTo',
         googleSheetName: 'Feuille 1',
-        formEndpoint: 'https://formsubmit.co/ajax/fondation.allam@gmail.com',
+        formEndpoint: 'https://api.web3forms.com/submit',
+        web3formsKey: 'f53c6dfb-89b3-4fea-9601-bfff8949db79',
         contactPageUrl: 'contact-don-alimentaire.html'
     };
 
-    // Envoi de formulaire via FormSubmit (statique, sans backend) — email formaté en tableau.
+    // Envoi de formulaire via Web3Forms (statique, sans backend).
     function postForm(form, extras) {
         var formData = new FormData(form);
         if (extras) {
             Object.keys(extras).forEach(function (k) { formData.append(k, extras[k]); });
         }
-        formData.set('_captcha', 'false');
-        formData.set('_template', 'table');
+        formData.set('access_key', CFG.web3formsKey);
         return fetch(CFG.formEndpoint, {
             method: 'POST',
             body: formData,
@@ -28,14 +28,14 @@
         });
     }
 
-    // FormSubmit renvoie success sous forme de chaîne "true".
+    // Web3Forms renvoie success:true.
     function isOk(json) {
         return json && (json.success === true || json.success === 'true');
     }
 
-    // Détecte le honeypot (_honey pour FormSubmit, _gotcha en secours).
+    // Détecte le honeypot (_honey, _gotcha ou botcheck en secours).
     function isSpam(form) {
-        var h = form.querySelector('[name="_honey"], [name="_gotcha"]');
+        var h = form.querySelector('[name="_honey"], [name="_gotcha"], [name="botcheck"]');
         return h && h.value;
     }
 
@@ -584,7 +584,7 @@
         btn.textContent = 'Envoi en cours...';
         btn.disabled = true;
 
-        postForm(form, { type_formulaire: 'CONTACT', _subject: 'Nouveau message de contact — Fondation Allam' })
+        postForm(form, { type_formulaire: 'CONTACT', subject: 'Nouveau message de contact — Fondation Allam' })
             .then(function (r) { return r.json(); })
             .then(function (json) {
                 if (isOk(json)) {
@@ -621,7 +621,7 @@
         btn.textContent = 'Envoi en cours...';
         btn.disabled = true;
 
-        postForm(form, { type_formulaire: 'RESERVATION_ARTICLE', _subject: 'Réservation d\'article — Fondation Allam' })
+        postForm(form, { type_formulaire: 'RESERVATION_ARTICLE', subject: 'Réservation d\'article — Fondation Allam' })
             .then(function (r) { return r.json(); })
             .then(function (json) {
                 if (isOk(json)) {
@@ -651,7 +651,7 @@
         btn.textContent = 'Envoi en cours...';
         btn.disabled = true;
 
-        postForm(form, { type_formulaire: 'PROPOSITION_DON', _subject: 'Proposition de don — Fondation Allam' })
+        postForm(form, { type_formulaire: 'PROPOSITION_DON', subject: 'Proposition de don — Fondation Allam' })
             .then(function (r) { return r.json(); })
             .then(function (json) {
                 if (isOk(json)) {
