@@ -331,6 +331,10 @@
     });
 
     // ===== Articles (page Nos Articles) — catalogue local =====
+    // Catégories officielles (ordre d'affichage des filtres).
+    // Utilise EXACTEMENT un de ces noms dans le champ "categorie" ci-dessous.
+    var CATEGORY_ORDER = ['Vêtements', 'Chaussures', 'Multimédia', 'Électroménager', 'Mobilier', 'Jouets', 'Livres', 'Loisirs'];
+
     // Pour ajouter/retirer un article : modifier ce tableau.
     // statut : 'disponible' | 'réservé' (grisé) | 'masqué' (retiré de la page)
     var LOCAL_ARTICLES = [
@@ -366,32 +370,35 @@
             return s !== 'masqué' && s !== 'masque';
         });
 
-        if (articlesData.length === 0) {
-            if (empty) empty.style.display = 'block';
-            buildCategoryFilters();
-        } else {
-            if (empty) empty.style.display = 'none';
-            buildCategoryFilters();
-            renderFiltered();
-        }
+        if (empty) empty.style.display = 'none';
+        buildCategoryFilters();
+        renderFiltered();
     };
 
     var currentCategory = 'all';
 
-    // Construit la barre de filtres à partir des catégories présentes
+    function countInCategory(cat) {
+        return articlesData.filter(function (a) { return a.categorie === cat; }).length;
+    }
+
+    // Construit la barre de filtres : toutes les catégories officielles + un badge du nombre d'articles
     function buildCategoryFilters() {
         var wrap = document.getElementById('itemsFilters');
         if (!wrap) return;
-        var cats = [];
+
+        // Ordre officiel, puis d'éventuelles catégories supplémentaires présentes
+        var cats = CATEGORY_ORDER.slice();
         articlesData.forEach(function (a) {
             if (a.categorie && cats.indexOf(a.categorie) === -1) cats.push(a.categorie);
         });
-        // Pas de barre de filtres s'il n'y a qu'une seule catégorie
-        if (cats.length <= 1) { wrap.innerHTML = ''; return; }
 
-        var html = '<button class="items-filter-btn active" data-cat="all">Tout</button>';
+        var html = '<button class="items-filter-btn' + (currentCategory === 'all' ? ' active' : '') +
+                   '" data-cat="all">Tout <span class="filter-count">' + articlesData.length + '</span></button>';
         cats.forEach(function (c) {
-            html += '<button class="items-filter-btn" data-cat="' + c + '">' + c + '</button>';
+            var isActive = currentCategory === c;
+            html += '<button class="items-filter-btn' + (isActive ? ' active' : '') +
+                    '" data-cat="' + c + '">' + c +
+                    ' <span class="filter-count">' + countInCategory(c) + '</span></button>';
         });
         wrap.innerHTML = html;
 
@@ -410,6 +417,13 @@
         var list = currentCategory === 'all'
             ? articlesData
             : articlesData.filter(function (a) { return a.categorie === currentCategory; });
+
+        if (list.length === 0) {
+            var grid = document.getElementById('itemsGrid');
+            if (grid) grid.innerHTML = '<div class="items-empty-cat">Aucun article dans cette catégorie pour le moment. Revenez bientôt&nbsp;! 🙂</div>';
+            populateArticleSelect();
+            return;
+        }
         renderArticles(list);
     }
 
