@@ -333,7 +333,7 @@
     // ===== Articles (page Nos Articles) — catalogue local =====
     // Catégories officielles (ordre d'affichage des filtres).
     // Utilise EXACTEMENT un de ces noms dans le champ "categorie" ci-dessous.
-    var CATEGORY_ORDER = ['Vêtements', 'Chaussures', 'Multimédia', 'Électroménager', 'Mobilier', 'Jouets', 'Livres', 'Loisirs'];
+    var CATEGORY_ORDER = ['Vêtements', 'Chaussures', 'Multimédia', 'Électroménager', 'Mobilier', 'Jouets', 'Livres', 'Fournitures', 'Loisirs'];
 
     // Pour ajouter/retirer un article : modifier ce tableau.
     // statut : 'disponible' | 'réservé' (grisé) | 'masqué' (retiré de la page)
