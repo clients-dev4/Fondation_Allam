@@ -134,12 +134,28 @@
 .fairness-note svg { width: 24px; height: 24px; flex-shrink: 0; color: var(--primary-dark); }
 .fairness-note strong { color: var(--primary-dark); }
 
+/* Filtres par catégorie */
+.items-filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 40px; }
+.items-filter-btn {
+    background: var(--white);
+    border: 1px solid var(--gray-border);
+    color: var(--text-color);
+    font-weight: 600; font-size: 14px;
+    padding: 9px 18px; border-radius: 50px;
+    cursor: pointer; transition: var(--transition);
+}
+.items-filter-btn:hover { border-color: var(--primary-color); color: var(--primary-dark); }
+.items-filter-btn.active {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: #fff; border-color: transparent;
+}
+
 /* Grille d'articles */
 .items-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
-    margin-top: 45px;
+    margin-top: 30px;
 }
 .item-card {
     background: var(--white);
@@ -293,6 +309,9 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
             <span><strong>Une seule demande par personne</strong> — un seul article par foyer, afin que chacun puisse en bénéficier. C'est <strong>premier arrivé, premier servi</strong>&nbsp;! 🙏</span>
         </div>
+
+        <!-- Filtres par catégorie (générés automatiquement) -->
+        <div class="items-filters" id="itemsFilters"></div>
 
         <!-- Grille d'articles -->
         <div class="items-grid" id="itemsGrid"></div>

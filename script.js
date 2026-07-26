@@ -334,18 +334,18 @@
     // Pour ajouter/retirer un article : modifier ce tableau.
     // statut : 'disponible' | 'réservé' (grisé) | 'masqué' (retiré de la page)
     var LOCAL_ARTICLES = [
-        { titre: 'Maillot PSG 2023-24 domicile', categorie: 'Maillot de foot', description: 'Maillot domicile Nike 2023-24, floqué « IVAR 04 » au dos. Très bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/maillot_psg2_M.jpeg', statut: 'disponible' },
-        { titre: 'Maillot PSG 2020-21 domicile', categorie: 'Maillot de foot', description: 'Maillot domicile Nike 2020-21 (sponsor ALL). Très bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/maillot_psg_M.jpeg', statut: 'disponible' },
-        { titre: 'Maillot Algérie rose (adidas)', categorie: 'Maillot de foot', description: 'Maillot d\'entraînement adidas de l\'équipe d\'Algérie, rose. Bon état.', ville: 'Évry (91)', taille: 'L', prix: '2€', photo: 'articles/maillot_algerie_rose_L.jpeg', statut: 'disponible' },
-        { titre: 'Maillot Algérie vert (adidas)', categorie: 'Maillot de foot', description: 'Maillot adidas de l\'équipe d\'Algérie, vert rayé, 2 étoiles. Bon état.', ville: 'Évry (91)', taille: 'L', prix: '2€', photo: 'articles/maollot_algerie_vert_L.jpeg', statut: 'disponible' },
-        { titre: 'Maillot Espagne extérieur', categorie: 'Maillot de foot', description: 'Maillot extérieur adidas de l\'équipe d\'Espagne, blanc. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/maillot_espagne_M.jpeg', statut: 'disponible' },
-        { titre: 'Maillot Real Madrid 2020-21', categorie: 'Maillot de foot', description: 'Maillot domicile adidas 2020-21 (Emirates Fly Better), blanc. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/maillot_real_madrid_M.jpeg', statut: 'disponible' },
-        { titre: 'T-shirt Nike PSG « PARIS »', categorie: 'T-shirt', description: 'T-shirt Nike PSG « PARIS », bleu marine, coton. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/tshirt-psg-M.jpeg', statut: 'disponible' },
-        { titre: 'T-shirt adidas Originals bleu', categorie: 'T-shirt', description: 'T-shirt adidas Originals bleu, bandes tricolores aux épaules. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/tshirt_adidas_france_M.jpeg', statut: 'disponible' },
-        { titre: 'T-shirt Nike Sportswear jaune', categorie: 'T-shirt', description: 'T-shirt Nike Sportswear jaune clair, coton. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/tshirt_jaune_nike_M.jpeg', statut: 'disponible' },
-        { titre: 'T-shirt crème oversize', categorie: 'T-shirt', description: 'T-shirt crème coupe oversize. Bon état.', ville: 'Évry (91)', taille: 'S', prix: '2€', photo: 'articles/tshirt_creme_oversize_S.jpeg', statut: 'disponible' },
-        { titre: 'Sweat H&M vert d\'eau', categorie: 'Pull / Sweat', description: 'Sweat H&M col rond, vert d\'eau. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/pull_hm_M_bleu_turquoise.jpeg', statut: 'disponible' },
-        { titre: 'Sweat gris chiné (Zara)', categorie: 'Pull / Sweat', description: 'Sweat Zara col rond, gris chiné. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/pull_hm_gris_M.jpeg', statut: 'disponible' }
+        { titre: 'Maillot PSG 2023-24 domicile', categorie: 'Vêtements', description: 'Maillot domicile Nike 2023-24, floqué « IVAR 04 » au dos. Très bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/maillot_psg2_M.jpeg', statut: 'disponible' },
+        { titre: 'Maillot PSG 2020-21 domicile', categorie: 'Vêtements', description: 'Maillot domicile Nike 2020-21 (sponsor ALL). Très bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/maillot_psg_M.jpeg', statut: 'disponible' },
+        { titre: 'Maillot Algérie rose (adidas)', categorie: 'Vêtements', description: 'Maillot d\'entraînement adidas de l\'équipe d\'Algérie, rose. Bon état.', ville: 'Évry (91)', taille: 'L', prix: '2€', photo: 'articles/maillot_algerie_rose_L.jpeg', statut: 'disponible' },
+        { titre: 'Maillot Algérie vert (adidas)', categorie: 'Vêtements', description: 'Maillot adidas de l\'équipe d\'Algérie, vert rayé, 2 étoiles. Bon état.', ville: 'Évry (91)', taille: 'L', prix: '2€', photo: 'articles/maollot_algerie_vert_L.jpeg', statut: 'disponible' },
+        { titre: 'Maillot Espagne extérieur', categorie: 'Vêtements', description: 'Maillot extérieur adidas de l\'équipe d\'Espagne, blanc. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/maillot_espagne_M.jpeg', statut: 'disponible' },
+        { titre: 'Maillot Real Madrid 2020-21', categorie: 'Vêtements', description: 'Maillot domicile adidas 2020-21 (Emirates Fly Better), blanc. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/maillot_real_madrid_M.jpeg', statut: 'disponible' },
+        { titre: 'T-shirt Nike PSG « PARIS »', categorie: 'Vêtements', description: 'T-shirt Nike PSG « PARIS », bleu marine, coton. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/tshirt-psg-M.jpeg', statut: 'disponible' },
+        { titre: 'T-shirt adidas Originals bleu', categorie: 'Vêtements', description: 'T-shirt adidas Originals bleu, bandes tricolores aux épaules. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/tshirt_adidas_france_M.jpeg', statut: 'disponible' },
+        { titre: 'T-shirt Nike Sportswear jaune', categorie: 'Vêtements', description: 'T-shirt Nike Sportswear jaune clair, coton. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/tshirt_jaune_nike_M.jpeg', statut: 'disponible' },
+        { titre: 'T-shirt crème oversize', categorie: 'Vêtements', description: 'T-shirt crème coupe oversize. Bon état.', ville: 'Évry (91)', taille: 'S', prix: '2€', photo: 'articles/tshirt_creme_oversize_S.jpeg', statut: 'disponible' },
+        { titre: 'Sweat H&M vert d\'eau', categorie: 'Vêtements', description: 'Sweat H&M col rond, vert d\'eau. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/pull_hm_M_bleu_turquoise.jpeg', statut: 'disponible' },
+        { titre: 'Sweat gris chiné (Zara)', categorie: 'Vêtements', description: 'Sweat Zara col rond, gris chiné. Bon état.', ville: 'Évry (91)', taille: 'M', prix: '2€', photo: 'articles/pull_hm_gris_M.jpeg', statut: 'disponible' }
     ];
 
     var articlesData = [];
@@ -368,11 +368,50 @@
 
         if (articlesData.length === 0) {
             if (empty) empty.style.display = 'block';
+            buildCategoryFilters();
         } else {
             if (empty) empty.style.display = 'none';
-            renderArticles(articlesData);
+            buildCategoryFilters();
+            renderFiltered();
         }
     };
+
+    var currentCategory = 'all';
+
+    // Construit la barre de filtres à partir des catégories présentes
+    function buildCategoryFilters() {
+        var wrap = document.getElementById('itemsFilters');
+        if (!wrap) return;
+        var cats = [];
+        articlesData.forEach(function (a) {
+            if (a.categorie && cats.indexOf(a.categorie) === -1) cats.push(a.categorie);
+        });
+        // Pas de barre de filtres s'il n'y a qu'une seule catégorie
+        if (cats.length <= 1) { wrap.innerHTML = ''; return; }
+
+        var html = '<button class="items-filter-btn active" data-cat="all">Tout</button>';
+        cats.forEach(function (c) {
+            html += '<button class="items-filter-btn" data-cat="' + c + '">' + c + '</button>';
+        });
+        wrap.innerHTML = html;
+
+        wrap.querySelectorAll('.items-filter-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                currentCategory = btn.getAttribute('data-cat');
+                wrap.querySelectorAll('.items-filter-btn').forEach(function (b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                renderFiltered();
+            });
+        });
+    }
+
+    // Affiche la grille selon la catégorie sélectionnée
+    function renderFiltered() {
+        var list = currentCategory === 'all'
+            ? articlesData
+            : articlesData.filter(function (a) { return a.categorie === currentCategory; });
+        renderArticles(list);
+    }
 
     function renderArticles(articles) {
         var grid = document.getElementById('itemsGrid');
