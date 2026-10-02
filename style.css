@@ -2075,8 +2075,12 @@ img {
 }
 
 @media (max-width: 768px) {
+    .header {
+        padding: 2px 0;
+    }
+
     .logo-img {
-        height: 84px;
+        height: 98px;
     }
 
     .footer-logo-img {
@@ -2377,16 +2381,16 @@ img {
 
 @media (max-width: 480px) {
     .logo-img {
-        height: 80px;
+        height: 94px;
     }
 
     .nav {
-        top: 92px;
-        height: calc(100vh - 92px);
+        top: 98px;
+        height: calc(100vh - 98px);
     }
 
     .hero {
-        margin-top: 92px;
+        margin-top: 98px;
         min-height: 510px;
     }
 
